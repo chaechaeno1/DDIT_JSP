@@ -8,7 +8,7 @@ public class IndexVO {
 	private String chapterMoveUrl;
 	private  List<String> sourceList;
 	
-	// shift + alt + s
+	
 	public String getChapter() {
 		return chapter;
 	}

@@ -19,7 +19,7 @@ public class IndexRepository {
 		//챕터 정보를
 		String[] chapters = {
 			"CH01","CH02","CH03","CH04","CH05","CH06","CH07",
-			"CH08","CH10","CH11","CH12","CH13","CH14","CH17",
+			"CH08","CH10","CH11","CH12","CH13","CH14","CH17"
 		};
 		//각 챕터의 제목들
 		String[] titles = {
@@ -69,7 +69,7 @@ public class IndexRepository {
 			indexVO.setChapterMoveUrl(chapterMoveUrls[i]);
 			
 			List<String> sourceList = new ArrayList<String>();
-			for(int j = 0; j < sourceArr[i].length; i++) {
+			for(int j = 0; j < sourceArr[i].length; j++) {
 				sourceList.add(sourceArr[i][j]);
 			}
 			indexVO.setSourceList(sourceList);

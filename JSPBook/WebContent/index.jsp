@@ -1,3 +1,6 @@
+<%@page import="kr.or.ddit.index.IndexVO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.index.IndexRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,6 +27,11 @@
 </head>
 
 <body>
+	<%
+		IndexRepository dao = IndexRepository.getInstance();
+		List<IndexVO> indexList = dao.getIndexList();
+	%>
+
     <div class="preloader">
         <div class="preloader-inner">
             <div class="preloader-icon">
@@ -54,15 +62,29 @@
             <div class="cat-inner">
                 <div class="row">
                     <div class="col-12 p-0">
-                        <div class="category-slider">
+                         <div class="category-slider">
+                    	<%
+							for(int i = 0; i < indexList.size(); i++){
+								IndexVO index = indexList.get(i);
+						%>
+
+
                             <a href="category.html" class="single-cat">
                                 <div class="icon">
                                     <img src="/resources/assets/images/categories/laptop.svg" alt="#">
                                 </div>
-                                <h3>ch01</h3>
-                                <h5 class="total">0</h5>
+                                <h3><%=index.getChapter()%></h3>
+                                <h5 class="total"><%=index.getSourceList().size()%></h5>
                             </a>
+
+
+						
+						<% 		
+							}
+                    	%>
+                    	
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -82,7 +104,12 @@
             </div>
             <div class="single-head">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-12">
+                	<%
+                		for(int i = 0; i <indexList.size(); i++){
+                			IndexVO index = indexList.get(i);
+                        	%>	
+                        	
+                        	<div class="col-lg-4 col-md-6 col-12">
                         <!-- Start Single Grid -->
                         <div class="single-grid wow fadeInUp" data-wow-delay=".4s">
                             <div class="image">
@@ -93,23 +120,40 @@
                                             <span>DDIT</span></a>
                                     </div>
                                 </div>
-                                <p class="item-position"><i class="lni lni-bolt"></i> CH01</p>
+                                <p class="item-position"><i class="lni lni-bolt"></i><%=index.getChapter() %></p>
                             </div>
                             <div class="content">
                                 <div class="top-content">
-                                    <a href="javascript:void(0)" class="tag">CH01</a>
+                                    <a href="javascript:void(0)" class="tag"><%=index.getChapter() %></a>
                                     <h3 class="title">
-                                        <a href="item-details.html">Ch01. JSP 개요</a>
+                                        <a href="item-details.html"><%=index.getTitle()%></a>
                                     </h3>
-                                    <p class="update-time">welcome.jsp</p>
+                                    <%
+                                    	for(int j=0; j<index.getSourceList().size(); j++){
+                                    		String sourcePage = index.getSourceList().get(j);
+                                    		
+                                    %>
+                                   	 <p class="update-time"><%=sourcePage%></p>
+                                    <% 
+                                	    }                                
+                                    %>		
+                                    	
+                                                                        
+                                    
                                 </div>
                                 <div class="bottom-content">
-                                    <button class="btn btn-primary">더보기</button>
+                                    <button class="btn btn-primary" 
+                                    	onclick="javascript:location.href='<%=request.getContextPath() + index.getChapterMoveUrl()%>'">더보기</button>
                                 </div>
                             </div>
                         </div>
  
                     </div>
+                        		
+                		<%	
+                		}
+						%>
+                
 
                 </div>
             </div>
