@@ -62,7 +62,27 @@ public class IndexRepository {
 		};
 		
 		//최종 indexList에 추가
+		for(int i = 0; i < chapters.length; i++) {
+			IndexVO indexVO = new IndexVO();
+			indexVO.setChapter(chapters[i]);
+			indexVO.setTitle(titles[i]);
+			indexVO.setChapterMoveUrl(chapterMoveUrls[i]);
+			
+			List<String> sourceList = new ArrayList<String>();
+			for(int j = 0; j < sourceArr[i].length; i++) {
+				sourceList.add(sourceArr[i][j]);
+			}
+			indexVO.setSourceList(sourceList);
+			indexList.add(indexVO);
+		}
 		
 	}
+	
+	
+	public List<IndexVO> getIndexList(){
+		return indexList;
+	}
+	
+	
 	
 }
