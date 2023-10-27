@@ -42,7 +42,10 @@ public class IndexRepository {
 				},
 				{							//ch02
 					"scripting.jsp",
-					"declaration01.jsp"
+					"declaration01.jsp","declaration02.jsp","declaration03.jsp",
+					"scriptlet01.jsp","scriptlet02.jsp",
+					"expression01.jsp","expression02.jsp",
+					"ch02_test.jsp"
 					
 				},
 				{""},						//ch03
