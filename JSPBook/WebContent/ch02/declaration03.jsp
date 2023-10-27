@@ -64,18 +64,17 @@
                 <div class="col-lg-12 col-md-12 col-12">
                     <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
 
-						<%!
-							//전역 메소드 sum()을 선언하기 위해 선언문 태그를 작성
-							int sum(int a, int b){
-								return a+b;
+							<%!
+								//전역 메소드 makeItLower()를 선언하기 위해 선언문 태그를 작성
+								String makeItLower(String data){
+									return data.toLowerCase();
 							}
-						%>
-						
-						<%
-							// println() 메소드를 이용하여 내용을 출력하도록 스크립틀릿 태그를 작성
-							// 여기서 선언된 sum() 메소드는 선언문 태그에 선언된 전역 메소드인 sum()을 호출
-							out.println("a(2) + b(3) = " + sum(2,3));
-						%>
+							%>
+							<%
+								// printn() 메소드로 makeItLower() 메소드를 호출하여 내용을 출력하도록
+								// 스크립틀릿 태그를 작성함
+								out.println(makeItLower("Hello World!"));
+							%>
 						
 
                     </div>

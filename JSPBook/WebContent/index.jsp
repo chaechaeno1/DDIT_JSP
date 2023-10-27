@@ -116,7 +116,7 @@
                                 <a href="item-details.html" class="thumbnail"><img src="/resources/assets/images/items-grid/img5.jpg" alt="#"></a>
                                 <div class="author">
                                     <div class="author-image">
-                                        <a href="javascript:void(0)"><img src="/resources/assets/images/items-grid/author-5.jpg" alt="#">
+                                        <a href="javascript:void(0)"><img src="/resources/assets/images/items-grid/Ciao, Salut.jpg" alt="#">
                                             <span>DDIT</span></a>
                                     </div>
                                 </div>
