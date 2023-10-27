@@ -62,21 +62,17 @@
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-12 col-md-12 col-12">
-						<%!
-							//선언문 태그는 변수나 메소드 등을 선언하는 태그
-							//선언문 태그로 선언된 변수는 서블릿 프로그램으로 번역될 때 클래스 수준의 멤버 변수가
-							//되므로 전역변수로 사용된다.
-							
-							//변수 data에 50을 저장하도록 선언문 태그를 선언
-							int data = 50;
-						%>
-						
-						<%
-							//out 내장 객체의 println() 메소드를 이용하여 내용을 출력하도록
-							//스크립틀릿 태그를 작성
-							// 변수 data는 선언문 태그에 선언된 전역변수 값 50에 해당함
-							out.println("value of the vatiable is : "+data);
-						%>
+                    <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
+
+						<!-- 내용넣는 곳 -->
+						<!-- 내용넣는 곳 -->
+						<!-- 내용넣는 곳 -->
+						<!-- 내용넣는 곳 -->
+						<!-- 내용넣는 곳 -->
+						<!-- 내용넣는 곳 -->
+						<!-- 내용넣는 곳 -->
+						<!-- 내용넣는 곳 -->
+						<!-- 내용넣는 곳 -->
 						
 
                     </div>
