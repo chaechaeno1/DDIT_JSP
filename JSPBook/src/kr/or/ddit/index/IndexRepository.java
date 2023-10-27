@@ -38,7 +38,7 @@ public class IndexRepository {
 		//각 챕터의 소스 파일명들
 		String[][] sourceArr = {
 				{							//ch01
-					"/welcome.jsp"			
+					"welcome.jsp"			
 				},
 				{							//ch02
 					"scripting.jsp",

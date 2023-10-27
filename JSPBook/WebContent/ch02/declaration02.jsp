@@ -63,25 +63,21 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-12 col-md-12 col-12">
                     <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
-							<%!
-								//선언문 태그를 사용하여 자바 변수와 메소드 정의
-								int count = 3;	
-							
-								String makeItLower(String data){
-									return data.toLowerCase();
-								}
-							%>
-							
-							<%
-								//스크립틀릿 태그로 자바 로직 코드 작성
-								for(int i = 1; i <=count; i++){
-									out.println("Java Server pages" + i + "<br/>");
-								}
-							%>
-							<!-- 표현문 태그로 선언문의 메소드를 호출하여 문자열 형태로 출력 -->
-							<%=makeItLower("Hello World!") %>
+
+						<%!
+							//전역 메소드 sum()을 선언하기 위해 선언문 태그를 작성
+							int sum(int a, int b){
+								return a+b;
+							}
+						%>
 						
+						<%
+							// println() 메소드를 이용하여 내용을 출력하도록 스크립틀릿 태그를 작성
+							// 여기서 선언된 sum() 메소드는 선언문 태그에 선언된 전역 메소드인 sum()을 호출
+							out.println("a(2) + b(3) = " + sum(2,3));
+						%>
 						
+
                     </div>
                 </div>
             </div>
