@@ -6,13 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Web Market</title>
-<link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"/>
 </head>
 <body>
 	<%@include file="menu.jsp"%>
 	
-	<%
-		String greeting = "Welcome to Web Shopping Mall";
+	<%/* 
+		String greeting = "Welcome to Web Shopping Mall"; */
+		String greeting = "도서 웹 쇼핑몰";
 		String tagline = "Welcome to WebMarket!!";
 	%>
 	
