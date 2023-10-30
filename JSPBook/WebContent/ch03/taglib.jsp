@@ -175,6 +175,60 @@
 						</div>
                     </div>
                 </div> 
+
+                 <div class="col-lg-6 col-md-12 col-12">
+                    <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h6>JSTL을 통해  범위 내 값 출력<br/>
+									<font color="red">(choose-when/otherwise를 이용)</font>
+								</h6>
+							</div>
+							<div class="card-body">
+								<c:set value="5000" var="money"/>	
+								<p>내가 가진 돈은 ${money }원 입니다.</p>
+								<c:choose>
+									<c:when test="${money <= 0}">
+										무일푼
+									</c:when>
+									<c:when test="${money >= 5000 and money <= 10000 }">
+										커피 한잔의 여유 가능
+									</c:when> 
+									<c:otherwise>
+										밥 먹자!
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</div>
+                    </div>
+                </div> 
+
+                 <div class="col-lg-6 col-md-12 col-12">
+                    <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h6>JSTL을 통해  범위 내 값 출력<br/>
+									<font color="red">(if를 이용)</font>
+								</h6>
+							</div>
+							<div class="card-body">	
+								<p>내가 가진 돈은 ${money }원 입니다.</p>
+								<c:if test="${money <= 0 }">
+									무일푼
+								</c:if>
+								<c:if test="${money >= 5000 and money <= 10000 }">
+									커피 한잔의 여유 가능
+								</c:if>
+								<c:if test="${money > 10000}">
+									밥 먹자!
+								</c:if>
+							</div>
+						</div>
+                    </div>
+                </div> 
+
+
+
                 
             </div>
         </div>
