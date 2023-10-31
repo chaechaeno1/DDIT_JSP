@@ -13,6 +13,7 @@
 	<c:forEach begin="0" end="10" step="2" var="k">
 		<c:out value="${k }"/>
 	</c:forEach>
+	<br/>
 	
 	<c:forEach begin="0" end="10" step="1" var="k">
 		<c:if test="${k % 2 == 0}">

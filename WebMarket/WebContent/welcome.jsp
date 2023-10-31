@@ -28,7 +28,7 @@
 	<div class="container">
 		<div class="text-center">
 			<h3><%=tagline%></h3>
-			<%
+			<%-- <%
 				Date day = new Date();
 				String am_pm;
 				int hour = day.getHours();
@@ -43,7 +43,7 @@
 				}
 				String CT = hour + ":" + minute + ":" + second + " " + am_pm;
 				out.println("현재 접속 시간 : " + CT + "\n");
-			%>
+			%> --%>
 		</div>
 		<hr>
 	</div>
