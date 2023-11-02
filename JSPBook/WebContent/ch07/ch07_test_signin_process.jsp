@@ -1,3 +1,6 @@
+<%@page import="kr.or.ddit.ch07.MemberVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.or.ddit.ch07.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -47,6 +50,55 @@
 							4. 전달받은 아이디 비밀번호에 해당하지 않는 회원인 경우에 ch07_test-signin.jsp로 이동하여 
 								다시 로그인을 진행할 수 있도록 해주고, 에러 메세지를 출력해주세요! 
 						 -->
+						 
+						 <%
+						 	request.setCharacterEncoding("UTF-8");
+						 
+						 	// 1. 로그인 페이지에서 전송한 아이디, 비밀번호를 받는다.
+						 	String id = request.getParameter("id");
+						 	String pw = request.getParameter("pw");
+						 	
+						 	//2. 전달받은 아이디, 비밀번호에 해당하는 내 정보가 있는지 없는지 체크
+						 		//DAO 클래스는 데이터베이스와 상호작용하고 쿼리를 실행하는 데 사용
+						 		//VO 클래스는 데이터를 전달하는 데 사용 
+						 		
+						 	MemberDAO dao = MemberDAO.getInstance(); 
+						 	
+						 	//기본적으로 가입이 안되어있다고 가정한다.
+						 	boolean isVaildMem = false;
+						 	
+						 	//회원목록 가져오기
+						 	ArrayList<MemberVO> memberList = dao.getMemberList();
+						 	
+						 	// 전달받은 아이디, 비밀번호에 해당하는 내 정보가 있는지 없는지 체크
+						 		//for(자료형 변수명 : 배열명){
+								//		문장
+								//}
+						 	for(MemberVO mem : memberList){
+						 		if(mem.getMem_id().equals(id) && mem.getMem_pw().equals(pw)){
+						 			isVaildMem = true;
+						 			break;
+						 		}
+						 	}
+						 	//3.전달받은 아이디, 비밀번호에 해당하는 회원인 경우에 ch07_test_memberList.jsp로 이동하여
+							//회원 목록 페이지를 완성해주세요.
+						 	if(isVaildMem){
+						 		response.sendRedirect("ch07_test_memberList.jsp");	
+						 	}else{ 
+						 		// 4. 전달받은 아이디 비밀번호에 해당하지 않는 회원인 경우에 ch07_test-signin.jsp로 이동하여 
+								// 다시 로그인을 진행할 수 있도록 해주고, 에러 메세지를 출력해주세요!
+						 		session.setAttribute("errMsg", "존재하지 않는 회원입니다. 회원가입을 해주세요.");
+								response.sendRedirect("ch07_test_signin.jsp");
+						 		//document.getElementById("error").style.display = "inline";
+						 		
+						 	}
+						 
+						 %>
+						 
+						 
+						 
+						 
+						 
                     </div>
                 </div>
             </div>

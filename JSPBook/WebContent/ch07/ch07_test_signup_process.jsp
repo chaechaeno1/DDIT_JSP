@@ -2,9 +2,13 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="org.apache.commons.fileupload.DiskFileUpload"%>
-<%@page import="java.io.File"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.or.ddit.ch07.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.io.*" %>
+<%@ page import="javax.servlet.annotation.MultipartConfig" %>
+<%@ page import="javax.servlet.http.Part" %>    
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 <head>
@@ -49,62 +53,71 @@
 							2. 회원가입이 완료되면, ch07_test_signin.jsp로 이동하여 로그인을 진행할 수 있도록 해주세요.
 						 -->
 						 
-						 
-						 <%
-						 	String fileUploadPath = "C:\\upload";
-						 
-						 	File file = new File(fileUploadPath);
-						 	
-						 	if(!file.exists()){
-						 		file.mkdirs();
-						 	}
-						 	
-						 	DiskFileUpload upload = new DiskFileUpload();
-						 	
-						 	upload.setSizeMax(5*1024*1024);
-						 	upload.setSizeThreshold(4 * 1024 * 1024); 	
-							upload.setRepositoryPath(fileUploadPath);
-							
-							List items = upload.parseRequest(request);
-							Iterator params = items.iterator();
-							
-							int maxSize = 4 * 1024 * 1024;
-							
-							while(params.hasNext()){
-								FileItem fileitem = (FileItem) params.next();
-								
-								if(fileitem.isFormField()){
-									String name = fileitem.getFieldName();
-									String value = fileitem.getString("UTF-8");
-									out.println(name + "=" + value + "<br/>");
-								}else{						
-									String fileFieldName = fileitem.getFieldName();	//요청 파라미터의 이름	
-									String fileName = fileitem.getName();	//파일명
-									String contentType = fileitem.getContentType();	//파일 컨텐츠 타입(Mimetype)
-									long fileSize = fileitem.getSize();
-									
-									File newFile = new File(fileUploadPath + "/" + fileName);
-									
-									//최대 크기를 넘어버림(최대사이즈보다 큰 파일이 업로드 됨)
-									if(maxSize < fileSize){
-										out.println("파일 크기를 초과하였습니다!<br/>");
-										
-									}else{
-										fileitem.write(newFile);	//파일 복사
-										
-									}
-									
-									out.println("───────────────────────────────────<br/>");
-									out.println("요청 파라미터 이름 : "+ fileFieldName + "<br/>");
-									out.println("저장 파일 이름 : "+ fileName + "<br/>");
-									out.println("파일 컨텐츠 타입 : "+ contentType + "<br/>");
-									out.println("파일 크기 : "+ fileSize + "<br/>");
-													
-								}
-								
-							}
-							
-							%>
+						  <%
+		                        String id = request.getParameter("id");
+		                        String pw = request.getParameter("pw");
+		                        String name = request.getParameter("name");
+		                        String gender = request.getParameter("gender");
+		
+		                        // 파일 업로드 작업
+		                        String fileName = null;
+		                        String fileUploadPath = "C:\\upload";
+		                        File file = new File(fileUploadPath);
+		
+		                        if (!file.exists()) {
+		                            file.mkdirs();
+		                        }
+		
+		                        DiskFileUpload upload = new DiskFileUpload();
+		                        upload.setSizeMax(5 * 1024 * 1024);  // 최대 파일 크기 설정
+		                        upload.setSizeThreshold(4 * 1024 * 1024);  // 임시 저장 경로 크기 설정
+		                        upload.setRepositoryPath(fileUploadPath);  // 파일 임시 저장 경로 설정
+		
+		                        List items = upload.parseRequest(request);
+		                        Iterator params = items.iterator();
+		
+		                        int maxSize = 4 * 1024 * 1024;
+		
+		                        while (params.hasNext()) {
+		                            FileItem fileItem = (FileItem) params.next();
+		
+		                            if (fileItem.isFormField()) {
+		                                String fname = fileItem.getFieldName();
+		                                String value = fileItem.getString("UTF-8");
+		                                out.println(fname + "=" + value + "<br/>");
+		                            } else {
+		                                String fileFieldName = fileItem.getFieldName();
+		                                fileName = fileItem.getName(); // 파일명 설정
+		
+		                                File newFile = new File(fileUploadPath + File.separator + fileName);
+		
+		                                if (maxSize < fileItem.getSize()) {
+		                                    out.println("파일 크기를 초과하였습니다!<br/>");
+		                                } else {
+		                                    fileItem.write(newFile);  // 파일 복사
+		                                }
+		                            }
+		                        }
+		
+		                        MemberVO member = new MemberVO();
+		                        member.setMem_id(id);
+		                        member.setMem_pw(pw);
+		                        member.setMem_name(name);
+		                        member.setMem_sex(gender);
+		                        member.setFilename(fileName);
+		
+		                        ArrayList<MemberVO> memberList = (ArrayList<MemberVO>) pageContext.getAttribute("memberList");
+		                        if (memberList == null) {
+		                            memberList = new ArrayList<>();
+		                        }
+		
+		                        memberList.add(member);
+		                        pageContext.setAttribute("memberList", memberList);
+		
+		                        response.sendRedirect("ch07_test_signin.jsp");
+                        %>
+						    
+
 						 
 						 
                     </div>

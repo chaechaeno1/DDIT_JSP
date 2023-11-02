@@ -43,17 +43,17 @@
 							3. 뒤로가기 버튼을 생성하고, 뒤로가기 버튼을 클릭 시 다시 로그인 화면으로 나갈 수 있도록 해주세요.
 						 -->
 						 
-						 <form action="ch07_test_signup_process.jsp" method="post">
+						 <form action="ch07_test_signup_process.jsp" method="post" enctype="multipart/form-data">
 						 	아이디 : <input type="text" name="id" id="id"/><br/>
 						 	비밀번호 : <input type="text" name="pw" id="pw"/><br/>
 						 	이름 : <input type="text" name="name" id="name"/><br/>
-						 	성별 : <input type="radio" name="gender" id="genderM"/>남자
-						 		  <input type="radio" name="gender" id="genderG"/>여자<br/>
+						 	성별 : <input type="radio" name="gender" id="genderM" value="M"/>남자
+						 		  <input type="radio" name="gender" id="genderG" value="G"/>여자<br/>
 						 	프로필 이미지 : <br/>
 						 		 <input type="file" name="file" id="file"/><br/>
 						 	<br/>
 						 	<input type="submit" value="가입하기"/>
-						 	<input type="button" value="뒤로가기" onclick="history.back();" />
+						 	<input type="button" value="뒤로가기" onclick="location.href='ch07_test_signin.jsp'"/>
 						 	
 						 	
 						 </form>
@@ -72,7 +72,9 @@
 </body>
 
 
+<!-- 뒤로가기 버튼 클릭 시 다시 로그인 화면 출력되도록 하는 스크립트  -->
 <script type="text/javascript">
+
 
 
 </script>

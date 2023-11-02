@@ -1,3 +1,5 @@
+<%@page import="kr.or.ddit.ch07.MemberVO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -58,6 +60,50 @@
 									 
 						 -->
 						 
+						   <%
+						        String loggedInUser = "a001"; // 이 부분에서 실제 로그인한 사용자의 아이디를 가져오도록 수정
+						    %>
+						    <p><%= loggedInUser %>님! 환영합니다!</p>
+						    <!-- 로그아웃 링크 -->
+						    <a href="logout.jsp">로그아웃</a>
+
+						
+						<%-- 회원 목록 테이블 --%>
+						<section>
+						    <table border="1">
+						        <tr>
+						            <th>이미지</th>
+						            <th>회원 정보</th>
+						            <th>버튼</th>
+						        </tr>
+						        <%-- 회원 목록 불러오기 --%>
+						        <%
+						            
+						            ArrayList<MemberVO> memberList = (ArrayList<MemberVO>) request.getAttribute("memberList");
+						            if (memberList != null) {
+						                for (MemberVO member : memberList) {
+						        %>
+						        <tr>
+						            <td>이미지</td>
+						            <td>
+						                아이디: <%= member.getMem_id() %><br>
+						                비밀번호: <%= member.getMem_pw() %><br>
+						                이름: <%= member.getMem_name() %><br>
+						                성별: <%= member.getMem_sex() %>
+						            </td>
+						            <td>
+						                <a href="detail.jsp?id=<%= member.getMem_id() %>">상세정보</a>
+						            </td>
+						        </tr>
+						        <%
+						                }
+						            }
+						        %>
+						    </table>
+						</section>
+						
+						    <a href="register.jsp">회원등록</a>
+
 						 
 						 
 						 
