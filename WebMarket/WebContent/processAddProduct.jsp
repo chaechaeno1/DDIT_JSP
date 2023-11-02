@@ -1,3 +1,4 @@
+<%@page import="vo.Product"%>
 <%@page import="dao.ProductRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -31,6 +32,19 @@
 	
 	ProductRepository dao = ProductRepository.getInstance();
 	
+	Product product = new Product();
+	product.setProductId(productId);
+	product.setPname(name);
+	product.setUnitPrice(price);
+	product.setDescription(description);
+	product.setManufacturer(manufacturer);
+	product.setCategory(category);
+	product.setUnitInStock(stock);
+	product.setCondition(condition);
+	
+	dao.addProduct(product);
+	
+	response.sendRedirect("products.jsp");
 	
 %>
 
