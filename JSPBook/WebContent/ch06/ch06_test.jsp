@@ -58,7 +58,7 @@
 							ch06_process.jsp로 데이터를 전송 후 해당 페이지에서 마무리해주세요.
 						 -->
 						 
-						 <form action="ch06_test_process.jsp" method="post">
+						 <form action="ch06_test_process2.jsp" method="post">
 							아이디 : <input type="text" name="id" id="id"/><br/>
 							비밀번호 : <input type="text" name="pw" id="pw"/><br/>
 							이름 : <input type="text" name="name" id="name"/><br/>
@@ -73,11 +73,11 @@
 									<input type="text" name="phone3" id="phone3"><br/>
 							성별 : <input type="radio" id="genderM" name="gender" value="M">남자&nbsp;
 								  <input type="radio" id="genderG" name="gender" value="G">여자<br/>
-							취미 : <input type="checkbox" id="hobby1" name="hobby1" value="book"/>독서&nbsp;
-									<input type="checkbox" id="hobby2" name="hobby2" value="power"/>운동&nbsp;
-									<input type="checkbox" id="hobby3" name="hobby3" value="movie"/>영화&nbsp;
-									<input type="checkbox" id="hobby4" name="hobby4" value="music"/>음악&nbsp;
-									<input type="checkbox" id="hobby5" name="hobby5" value="trip"/>여행<br/>
+							취미 : <input type="checkbox" id="hobby1" name="hobby" value="book"/>독서&nbsp;
+									<input type="checkbox" id="hobby2" name="hobby" value="power"/>운동&nbsp;
+									<input type="checkbox" id="hobby3" name="hobby" value="movie"/>영화&nbsp;
+									<input type="checkbox" id="hobby4" name="hobby" value="music"/>음악&nbsp;
+									<input type="checkbox" id="hobby5" name="hobby" value="trip"/>여행<br/>
 							소개 : <textarea rows="20" cols="50" id="comment" name="comment" wrap="hard"></textarea>
 						 	<input type="submit" value="전송"/>		
 							<input type="reset" value="리셋"/>		

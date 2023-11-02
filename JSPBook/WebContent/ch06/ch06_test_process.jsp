@@ -57,6 +57,8 @@
 							출력은 JSTL을 이용한 출력으로 해주세요!	
 						 -->
 						 
+						 <!--hobby는 하나의 이름으로 받기 -->
+						 
 						 <%
 						 	request.setCharacterEncoding("utf-8");
 						 
@@ -112,6 +114,10 @@
 						 <c:set value="<%=phone%>" var="mem_phone"/>
 						 <c:set value="<%=gen%>" var="mem_gen"/>					 
 						 <c:set value="<%=hobby1%>" var="mem_hobby1"/>
+						 <c:set value="<%=hobby2%>" var="mem_hobby2"/>
+						 <c:set value="<%=hobby3%>" var="mem_hobby3"/>
+						 <c:set value="<%=hobby4%>" var="mem_hobby4"/>
+						 <c:set value="<%=hobby5%>" var="mem_hobby5"/>
 						 <c:set value="<%=comment%>" var="mem_comment"/>
 						 
 						 아이디 : <c:out value="${mem_id}"/> <br/>
