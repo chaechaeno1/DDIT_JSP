@@ -10,8 +10,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	// String realFolder = request.getRealPath("/") + "upload";
-	// getRealPath("/")의 유지보수 끝나므로 더이상 사용하지 않음
+	// String realFolder = request.getRealPath("/") + "upload"; //유지보수 끝나므로 더이상 사용하지 않음
 	
 	//웹 애플리케이션상의 절대 경로
 	String realFolder = request.getServletContext().getRealPath("/resources/images");
@@ -29,7 +28,7 @@
 	upload.setSizeThreshold(maxSize); //메모리상에 저장할 최대 크기
 	upload.setRepositoryPath(realFolder); //업로드된 파일을 임시로 저장할 경로
 	
-	List items = upload.parseRequest(request);
+	List items = upload.parseRequest(request); //일반 데이터, 파일데이터 모두 담음
 	Iterator params = items.iterator();
 	
 	//데이터를 저장하기 위한 변수 설정
@@ -119,6 +118,7 @@
 	product.setCategory(category);
 	product.setUnitInStock(stock);
 	product.setCondition(condition);
+	product.setFilename(fileName);
 	
 	dao.addProduct(product);
 	
