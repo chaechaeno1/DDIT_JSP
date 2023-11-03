@@ -1,6 +1,6 @@
-<%@page import="kr.or.ddit.ch07.MemberVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.or.ddit.ch07.MemberDAO"%>
+<%@page import="kr.or.ddit.ch07.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -52,37 +52,33 @@
 						 -->
 						 
 						 <%
-						 	request.setCharacterEncoding("UTF-8");
 						 
-						 	// 1. 로그인 페이지에서 전송한 아이디, 비밀번호를 받는다.
+							request.setCharacterEncoding("utf-8");
+						 	//1. 로그인 페이지에서 전송한 아이디, 비밀번호를 받는다.
 						 	String id = request.getParameter("id");
 						 	String pw = request.getParameter("pw");
 						 	
-						 	//2. 전달받은 아이디, 비밀번호에 해당하는 내 정보가 있는지 없는지 체크
-						 		//DAO 클래스는 데이터베이스와 상호작용하고 쿼리를 실행하는 데 사용
-						 		//VO 클래스는 데이터를 전달하는 데 사용 
-						 		
-						 	MemberDAO dao = MemberDAO.getInstance(); 
+						 	MemberDAO dao = MemberDAO.getInstance();
 						 	
-						 	//기본적으로 가입이 안되어있다고 가정한다.
-						 	boolean isVaildMem = false;
+						 	//회원정보 불러오기
+						 	ArrayList<MemberVO> memList = dao.getMemberList();
 						 	
-						 	//회원목록 가져오기
-						 	ArrayList<MemberVO> memberList = dao.getMemberList();
 						 	
-						 	// 전달받은 아이디, 비밀번호에 해당하는 내 정보가 있는지 없는지 체크
-						 		//for(자료형 변수명 : 배열명){
-								//		문장
-								//}
-						 	for(MemberVO mem : memberList){
-						 		if(mem.getMem_id().equals(id) && mem.getMem_pw().equals(pw)){
-						 			isVaildMem = true;
+						 	//가입된 회원인지 검증 
+						 	//기본값 : false
+						 	boolean login = false;
+						 	
+						 	for(MemberVO member : memList){
+						 		if(member.getMem_id().equals(id) && member.getMem_pw().equals(pw)){
+						 			login = true;
 						 			break;
 						 		}
 						 	}
-						 	//3.전달받은 아이디, 비밀번호에 해당하는 회원인 경우에 ch07_test_memberList.jsp로 이동하여
-							//회원 목록 페이지를 완성해주세요.
-						 	if(isVaildMem){
+						 	
+						 	
+						 	if(login){
+						 		session.setAttribute("id", id);
+						 		session.setAttribute("pw", pw);
 						 		response.sendRedirect("ch07_test_memberList.jsp");	
 						 	}else{ 
 						 		// 4. 전달받은 아이디 비밀번호에 해당하지 않는 회원인 경우에 ch07_test-signin.jsp로 이동하여 
@@ -92,10 +88,9 @@
 						 		//document.getElementById("error").style.display = "inline";
 						 		
 						 	}
+						 	
 						 
 						 %>
-						 
-						 
 						 
 						 
 						 

@@ -1,5 +1,6 @@
 <%@page import="kr.or.ddit.ch07.MemberVO"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="kr.or.ddit.ch07.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -60,51 +61,37 @@
 									 
 						 -->
 						 
-						   <%
-						        String loggedInUser = "a001"; // 이 부분에서 실제 로그인한 사용자의 아이디를 가져오도록 수정
-						    %>
-						    <p><%= loggedInUser %>님! 환영합니다!</p>
-						    <!-- 로그아웃 링크 -->
-						    <a href="logout.jsp">로그아웃</a>
-
-						
-						<%-- 회원 목록 테이블 --%>
-						<section>
-						    <table border="1">
-						        <tr>
-						            <th>이미지</th>
-						            <th>회원 정보</th>
-						            <th>버튼</th>
-						        </tr>
-						        <%-- 회원 목록 불러오기 --%>
-						        <%
-						            
-						            ArrayList<MemberVO> memberList = (ArrayList<MemberVO>) request.getAttribute("memberList");
-						            if (memberList != null) {
-						                for (MemberVO member : memberList) {
-						        %>
-						        <tr>
-						            <td>이미지</td>
-						            <td>
-						                아이디: <%= member.getMem_id() %><br>
-						                비밀번호: <%= member.getMem_pw() %><br>
-						                이름: <%= member.getMem_name() %><br>
-						                성별: <%= member.getMem_sex() %>
-						            </td>
-						            <td>
-						                <a href="detail.jsp?id=<%= member.getMem_id() %>">상세정보</a>
-						            </td>
-						        </tr>
-						        <%
-						                }
-						            }
-						        %>
-						    </table>
-						</section>
-						
-						    <a href="register.jsp">회원등록</a>
-
-						 
+						 <%
+						 	request.setCharacterEncoding("utf-8");
+						 	String id = (String)session.getAttribute("id");
+						 	out.print("<p>"+id+"님! 환영합니다!" +"<br>");
+						 	out.print("<input type ='button' value='로그아웃' onclick='location.href='ch07_test_signin.jsp''>");
+						 	MemberDAO dao = MemberDAO.getInstance();
+                    		ArrayList<MemberVO> memList = dao.getMemberList();
+                    		
+                    		out.print("<table class ='table table-bordered' width='100%'>");
+                    		out.print("<tr><th>이미지</th><th>회원정보</th><th>버튼</th></tr>");
+                    		for(int i = 0 ; i < memList.size(); i++)
+                    		{	
+                    			MemberVO vo = memList.get(i);
+                    			/* String path = "./resources/file/" + vo.getFilename(); */
+                    			String fileUploadPath = request.getContextPath()+ "/file/" + vo.getFilename();
+                    			StringBuilder sb = new StringBuilder();
+                    			
+                    			sb.append("<tr><td><img src='"+request.getContextPath()+"'style='width:100%'></td>");
+                    			sb.append("<td>아이디 :" + vo.getMem_id()+"<br>");
+                    			sb.append("비밀번호 : "+vo.getMem_pw()+"<br>");
+                    			sb.append("이름 : "+vo.getMem_name()+"<br>");
+                    			sb.append("성별 : "+vo.getMem_sex()+"</td>");
+                    			sb.append("<td><input type='button' value='상세정보'></td></tr>");
+                    			out.print(sb.toString());
+                    			
+                    		}
+                    		out.print("</table>");
+                    		
+                    	%>
+                    	<input type="button" value="회원등록" onclick="location.href='ch07_test_signup.jsp'">
+						 	
 						 
 						 
 						 

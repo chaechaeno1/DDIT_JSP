@@ -44,13 +44,15 @@
 								메세지가 출력되게 해주세요.
 							3. 회원가입 버튼을 생성하고, 회원 가입 버튼을 클릭 시 회원가입 페이지로 이동합니다.
 						 -->
+						 
+						 
 						 <%
 						 	//getAttribute로 errMsg 선언
 						 	String errMsg = (String)session.getAttribute("errMsg");
 						 	if(errMsg == null) errMsg = "";
 						 %>
 						 
-						 
+						 <!-- enctype 없애니까 로그인 잘됨 -->
 						 <form action="ch07_test_signin_process.jsp" method="post">
 						 	아이디:<input type="text" name="id" id="id"/><br/>
 						 	비밀번호:<input type="text" name="pw" id="pw"/><br/>
