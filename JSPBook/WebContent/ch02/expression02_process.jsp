@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/resources/assets/css/tiny-slider.css" />
     <link rel="stylesheet" href="/resources/assets/css/glightbox.min.css" />
     <link rel="stylesheet" href="/resources/assets/css/main.css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -64,66 +64,17 @@
                 <div class="col-lg-12 col-md-12 col-12">
                     <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
 
-						<!-- 
-							구구단 1~9단까지 출력해주세요.
-							짝수 단인 경우에는 빨간색으로 출력해주세요.
-							- 정렬 기준을 2가지로 제공하고, 제공된 정렬에 따라 출력을 다르게 해주세요.
-								> 가로로 정렬, 세로로 정렬						
-						 -->
-						 <h6>구구단 1~9단가지 출력해주세요. 짝수단인 경우에는 빨간색으로 출력해주세요!</h6>
-						  <br>
-						 <select id="orderSelect">
-						 	<option>--선택해주세요--</option>
-						 	<option value="1">가로로 정렬</option>
-						 	<option value="2">세로로 정렬</option>
-						 </select>
-						 <br/>	
-						 		
-					 	<div id="t1">
-						 <%
-						 	String color = "";
-						 	out.println("<table class='table table-bordered' width='100%'>");
+						<%
+							int a = 10;
+							int b = 20;
+							int c = 30;
+							
+						%>
 						
-						 	//가로 정렬 for문
-						 	for(int i=1; i<10; i++){ //단
-						 		out.println("<tr align='center'>");
-								for(int j=1; j<10; j++){
-									if(i%2==0){
-										color = "red";
-									}else{
-										color = "black";
-									}
-									out.println("<td><font color='"+color+"'>"
-									+ i + " x " + j + " = " + i*j + "</font></td>");
-								}	 		
-						 		out.println("</tr>");
-						 	}
-						 	out.println("</table>");
-						 %>
-						 </div>
-						 						 				 
-						 <div id="t2">
-						 <%
-						 	out.println("<table class='table table=bordered' width='100%'>");
+						<!-- 스크립틀릿 태그에 선언한 변수 a,b,c의 값을 출력하도록 표현문 태그를 작성함 -->
+						<%= a+b+c %>
 						
-						 	//세로 정렬 for문
-						 	for(int i=1; i<10; i++){ //단
-						 		out.println("<tr align='center'>");
-								for(int j=1; j<10; j++){
-									if(j%2==0){
-										color = "red";
-									}else{
-										color = "black";
-									}
-									out.println("<td><font color='"+color+"'>"
-									+ j + " x " + i + " = " + i*j + "</font></td>");
-								}	 		
-						 		out.println("</tr>");
-						 	}
-						 	out.println("</table>");
-						 %>	
-						 </div>					 
-						 
+
                     </div>
                 </div>
             </div>
@@ -192,30 +143,6 @@
             }
         });
     </script>
-    
-<script type="text/javascript">
-    	$(function(){
-    		var orderSelect = $("#orderSelect");
-    		
-    		$("#t1").hide();
-    		$("#t2").hide();
-    		
-    		orderSelect.on("change", function(){
-    			var value = $(this).val();
-    			
-    			if(value == "1"){
-    				$("#t1").show();
-    	    		$("#t2").hide();
-    			}else{
-    				$("#t2").show();
-    	    		$("#t1").hide();		
-    			}	
-	
-    		});
-
-    	});
-    </script>
-    
 </body>
 
 </html>
