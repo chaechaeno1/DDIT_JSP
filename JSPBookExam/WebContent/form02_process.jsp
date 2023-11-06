@@ -12,10 +12,13 @@
 	
 	<%
 		
+		// (1) 인코딩
 		request.setCharacterEncoding("utf-8");
 	
+		// (2) Enumeration(열거형)으로 name값 받기 ==> 구조연습 많이하기!
 		Enumeration params = request.getParameterNames();
 		
+		// (3) 
 		while(params.hasMoreElements()){
 			StringBuffer info = new StringBuffer((String)params.nextElement());
 			out.println(info + " : ");

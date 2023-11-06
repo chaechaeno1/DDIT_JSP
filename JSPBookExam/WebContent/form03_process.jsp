@@ -10,8 +10,10 @@
 	
 	<h3>선택한 과일</h3>
 	<%
+		// (1) 인코딩
 		request.setCharacterEncoding("utf-8");
 	
+		// (2) 체크박스 name="fruit"인 값들 배열로 만들기
 		String[] fruits = request.getParameterValues("fruit");
 		
 		if(fruits != null){

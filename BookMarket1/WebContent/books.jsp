@@ -22,22 +22,22 @@
 		ArrayList<Book> listOfBooks = dao.getAllBooks();
 	
 	%>
-
-	<div class="container">	
-		<div class="row">
-			<!--
-			<div class="col-md-3" align="center">	
-				<img src="${pageContext.request.contextPath }/resources/images/" width="60%">
-			</div>
-			-->
-			
-		<%
+	
+			<%
 		
 			for(int i = 0; i < listOfBooks.size(); i++){
 				Book book = listOfBooks.get(i);
 			
 				
 		%>
+
+	<div class="container">	
+		<div class="row">
+			<div class="col-md-3" align="center">	
+				<img src="${pageContext.request.contextPath}/resources/images/<%=book.getFilename()%>" width="60%">
+			</div>
+			
+
 			
 			
 			
