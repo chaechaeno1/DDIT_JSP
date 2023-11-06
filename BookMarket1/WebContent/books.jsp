@@ -38,9 +38,6 @@
 			</div>
 			
 
-			
-			
-			
 			<div class="col-md-10">	
 				<h5 ><b>서명 : <%=book.getName()%></b></h5>
 				<p style="padding-top: 10px">설명 : <%=book.getDescription()%></p> 

@@ -14,7 +14,7 @@
     	request.setCharacterEncoding("utf-8");
     
 
-    	String realFolder = request.getServletContext().getRealPath("/resources/images");
+    	String realFolder = request.getServletContext().getRealPath("resources/images");
     	String enctype = "UTF-8";
     	
     	int maxSize = 5*2014*2014;
@@ -43,7 +43,7 @@
     	String totalPages="" ; 		// 페이지수
     	String releaseDate="" ;   	// 출판일(월/년)
     	String condition="" ; 		// 신제품
-    	String filename="" ;		// 파일명
+    	String fileName="" ;		// 파일명
 
                 
     	while(params.hasNext()){
@@ -77,10 +77,10 @@
     				releaseDate = item.getString(enctype);
     		}else{		//파일 데이터일때 
     			String fileFieldName = item.getFieldName(); //요청 파라미터 이름
-    			filename = item.getName(); //저장 파일의 이름
+    			fileName = item.getName(); //저장 파일의 이름
     			String contentType = item.getContentType(); //파일 컨텐츠타입
     			long fileSize = item.getSize(); //파일 크기 정보
-    			File saveFile = new File(realFolder + "/" + filename);
+    			File saveFile = new File(realFolder + "/" + fileName);
     			item.write(saveFile); //파일 복사
     			
     		}
@@ -132,7 +132,7 @@
     	book.setTotalPages(pages);
     	book.setUnitPrice(price);
     	book.setUnitsInStock(stock);
-    	book.setFilename(filename);
+    	book.setFilename(fileName);
     	
     	//(6) dao에 객체 추가 후,  books.jsp로 보내기
     	dao.addBook(book);
