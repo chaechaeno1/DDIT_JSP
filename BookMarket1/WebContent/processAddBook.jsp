@@ -1,6 +1,5 @@
 <%@page import="org.apache.commons.fileupload.FileItem"%>
 <%@page import="org.apache.commons.fileupload.DiskFileUpload"%>
-<%@page import="java.util.Enumeration"%>
 <%@page import="vo.Book"%>
 <%@page import="dao.BookRepository"%>
 <%@page import="java.util.Iterator"%>
@@ -14,7 +13,7 @@
     	request.setCharacterEncoding("utf-8");
     
 
-    	String realFolder = request.getServletContext().getRealPath("resources/images");
+    	String realFolder = request.getServletContext().getRealPath("/resources/images");
     	String enctype = "UTF-8";
     	
     	int maxSize = 5*2014*2014;
@@ -75,6 +74,7 @@
     				totalPages = item.getString(enctype);
     			}else if(fieldName.equals("releaseDate")){
     				releaseDate = item.getString(enctype);
+    			}	
     		}else{		//파일 데이터일때 
     			String fileFieldName = item.getFieldName(); //요청 파라미터 이름
     			fileName = item.getName(); //저장 파일의 이름
@@ -82,25 +82,22 @@
     			long fileSize = item.getSize(); //파일 크기 정보
     			File saveFile = new File(realFolder + "/" + fileName);
     			item.write(saveFile); //파일 복사
-    			
+    				
     		}
-    	
-    		}
+    		
     	}
         
         
     	
       	//(3) 문자로 입력받은 항목 중 가격, 재고수, 페이지수는 숫자로 변환
     	Integer price;
-    	
-    	if(unitPrice.isEmpty()){
+       	if(unitPrice.isEmpty()){
     		price = 0;
     	}else{
     		price = Integer.valueOf(unitPrice);
     	}
     	
     	long stock;
-    	
     	if(unitsInStock.isEmpty()){
     		stock = 0;
     	}else{
@@ -108,7 +105,6 @@
     	}
     	
     	long pages;
-    	
     	if(totalPages.isEmpty()){
     		pages=0;
     	}else{
