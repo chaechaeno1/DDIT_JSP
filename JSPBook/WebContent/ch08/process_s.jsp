@@ -41,16 +41,18 @@
                 <div class="col-lg-12 col-md-12 col-12">
                     <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
 						
-                    	<%
-										request.setCharacterEncoding("UTF-8");
-									%>
-									<p>	퀘스트1 : <%=request.getParameter("quest1")%>
-									<p>	퀘스트2 :	<%=request.getParameter("quest2")%>
-									<p>	아이디 : <%=request.getParameter("mem_id")%>
-									<p>	비밀번호 : <%=request.getParameter("mem_pw")%>
-									<p>	이름 : <%=request.getParameter("mem_name")%>
-									<p>	전화번호 : <%=request.getParameter("mem_phone")%>
+						<%
+							request.setCharacterEncoding("utf-8");
+						
+							String id = request.getParameter("id");
+							String pw = request.getParameter("pw");
 							
+							
+						%>
+						
+						아이디 : <%=id%> <br>
+						비밀번호 : <%=pw%> <br>
+						
 
                     </div>
                 </div>

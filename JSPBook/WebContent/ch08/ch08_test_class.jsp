@@ -91,6 +91,7 @@
 
     <%@ include file="/pageModule/footerPart.jsp" %>
 </body>
+
 <script type="text/javascript">
 $(function(){
 
@@ -98,7 +99,7 @@ $(function(){
 	var regExpQuest1 = /^[0-9]{7,12}$/;
 	
 	// 시작은 영소문자 a,b,c고 영소대문자 8-12자리까지만 입력 받을 수 있게 설정
-	var regExpQuest2 = /^(abc)[a-zA-Z]{4,9}$/;
+	var regExpQuest2 = /^(abc)[a-zA-Z]{5,9}$/;
 	
 	// 아이디는 영소문자로 시작하고 영소문자, 숫자 8~16자로 설정
 	var regExpId = /^[a-z][a-z0-9]{7,15}$/;
