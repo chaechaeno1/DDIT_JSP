@@ -121,7 +121,7 @@
 
 							dao.addBoard(board);
 							
-							response.sendRedirect("boardView.jsp");
+							response.sendRedirect("boardView.jsp?no=" + );
 
 							
 
