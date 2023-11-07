@@ -1,3 +1,6 @@
+<%@page import="kr.or.ddit.ch11.vo.BoardFileVO"%>
+<%@page import="kr.or.ddit.ch11.vo.BoardVO"%>
+<%@page import="kr.or.ddit.ch11.dao.BoardRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -59,12 +62,21 @@
 						4. 목록 버튼 클릭 시, 목록 페이지(boardList.jsp)로 이동합니다.
 					 -->
 					 
+					 
+					  <%
+                                   // 게시글 ID를 가져와서 해당 게시글의 데이터를 조회합니다.
+                                   String boardId = request.getParameter("board_id");
+                                   BoardRepository dao = BoardRepository.getInstance();
+                                   BoardVO board = dao.getBoardById(boardId); // 예시로 메서드를 호출하여 게시글 데이터를 가져오는 것으로 가정합니다.
+                                   BoardFileVO fileVO = board.getFileVO(); // 파일 정보를 가져오는 것으로 가정합니다.
+                       %>
+					 
 					 <h4>게시판 상세보기</h4>
 					 <hr>
 
 					 <!-- 테이블 만들기 -->
 					 <table width="100%" class="table table-bordered">
-                            <c:forEach items="${board}" var="board">
+                            <c:forEach items="${ListOfBoards}" var="board">
                                 <tr>
                                     <td width="20%">제목</td>
                                     <td width="50%">${board.title}</td>
@@ -107,7 +119,7 @@
 </body>
 
 <script>
-function confirmDelete(){
+function confirmDelete(){s
 	var result = confirm("정말로 삭제하시겠습니까?");
 	if(result){
 		location.href="boardRemove.jsp";
