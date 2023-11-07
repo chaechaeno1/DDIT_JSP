@@ -101,6 +101,7 @@
 						<font color="red">전체 인원을 4명씩 끊어서 출력하고 자신의 이름을 본인으로 출력한다.</font>
 						 <br/>
 						 <c:set value="<%=nameList %>" var="names"/>
+						 
 						 <c:forEach items="${names }" var="name" varStatus="stat">
 						 	<c:if test="${name eq '김민채'}">
 						 		<font color="green"><b>본인</b></font>
