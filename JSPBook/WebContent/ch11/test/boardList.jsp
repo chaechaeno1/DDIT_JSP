@@ -1,3 +1,6 @@
+<%@page import="kr.or.ddit.ch11.vo.BoardVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.or.ddit.ch11.dao.BoardRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -75,6 +78,12 @@
 						3. 게시글 클릭 시, 해당 게시글 상세보기 페이지로 이동합니다.
 							> 상세보기 페이지로 이동할 때, 조회수가 상승합니다.
 					 -->
+					 
+					 <%
+					 	BoardRepository dao = BoardRepository.getInstance();
+					 	ArrayList<BoardVO> boardList = dao.selectBoardList();
+					 %>
+					 
 					 
 					 
 					 <h4>메뉴 박스</h4>
