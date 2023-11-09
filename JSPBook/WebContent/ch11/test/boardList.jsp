@@ -79,11 +79,11 @@
 							> 상세보기 페이지로 이동할 때, 조회수가 상승합니다.
 					 -->
 					 
-					 <%
-					 	BoardRepository dao = BoardRepository.getInstance();
-					 	ArrayList<BoardVO> boardList = dao.selectBoardList();
-					 %>
 					 
+					 
+					 <!-- 스크립틀릿으로 할 때 왜 적용이 안되는지??? -->
+					<c:set var="dao" value="<%= BoardRepository.getInstance() %>" />
+					<c:set var="boardList" value="${dao.selectBoardList()}" />
 					 
 					 
 					 <h4>메뉴 박스</h4>
@@ -110,16 +110,14 @@
 					 	
 					 		<c:otherwise>
 							 	<c:forEach items="${boardList}" var="board">
-							 		<tr>
-							 			<td>${board.no}</td>
-							 			<td><a href="boardView.jsp?${board.no}">${board.title}</a></td>
-							 			<td>${board.witer}</td>
-							 			<td>${board.regDate}</td>
-							 			<td>${board.hit}</td>
-							 		</tr>
-							 	
-							 		
-							 	</c:forEach>
+								    <tr>
+								        <td>${board.no}</td>
+								        <td><a href="boardView.jsp?no=${board.no}">${board.title}</a></td>
+								        <td>${board.writer}</td>
+								        <td>${board.regDate}</td>
+								        <td>${board.hit}</td>
+								    </tr>
+								</c:forEach>
 						 	
 					 		</c:otherwise>
 					 	</c:choose>
@@ -128,6 +126,7 @@
 					 
 					 <!-- 게시글 등록 버튼 -->
 					 <input type="button" value="등록" onclick ="location.href='boardForm.jsp'">
+					 
 					 
 					 
 					 

@@ -1,3 +1,5 @@
+<%@page import="kr.or.ddit.ch11.dao.BoardRepository"%>
+<%@page import="kr.or.ddit.ch11.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
@@ -53,37 +55,44 @@
 					 -->
 					 
 					 
+					  <%
+					 	int no = Integer.parseInt(request.getParameter("no"));
+					 
+					 	BoardVO boardvo = BoardRepository.getInstance().getBoardById(no);
+					 %>
+					 
+					 
 					 <h4>게시판 수정</h4>
 					 <hr>
-					  <table width="100%" class="table table-bordered">
-					  	<tr>
-					  		<td width="30%">제목</td>
-					  		<td width="70%"></td>
-					  	</tr>
-					  	<tr>
-					  		<td width="30%">내용</td>
-					  		<td width="70%"></td>
-					  	</tr>
-					  	<tr>
-					  		<td width="30%">파일</td>
-					  		<td width="70%"></td>
-					  	</tr>
-					  	<tr>
-					  		<td width="30%">첨부파일 내용</td>
-					  		<td width="70%"></td>
-					  	</tr>
-					  	<tr>
-					  		<td colspan="2">
-					  			<input type="button" value="수정" name="updateBtn" id="updateBtn" onclick="location.href='boardUpdate.jsp'">
-								<input type="button" value="취소" name="deleteBtn" id="deleteBtn" onclick="location.href='boardList.jsp'">
-					  		</td>
-					  	</tr>
-					  	
-					  	
-					  	
-					  
-					  </table>
-					 
+					 <form action="boardUpdate.jsp?no=<%=no %>" method="post" enctype="multipart/form-data" id="updateForm">
+						  <table width="100%" class="table table-bordered">
+						  	<tr>
+						  		<td width="30%">제목</td>
+						  		<td width="70%"><input type="text" name="title" value="<%= boardvo.getTitle()%>"></td>
+						  	</tr>
+						  	<tr>
+						  		<td width="30%">내용</td>
+						  		<td width="70%">
+						  			<textarea name="content" cols="100" rows="10"><%= boardvo.getContent()%></textarea>
+						  		</td>
+						  	</tr>
+						  	<tr>
+						  		<td width="30%">파일</td>
+						  		<td width="70%"><input type="file" name="file"></td>
+						  	</tr>
+						  	<tr>
+						  		<td width="30%">첨부파일 내용</td>
+						  		<td width="70%"><a href="${pageContext.request.contextPath}/resources/images/<%=boardvo.getFileVO().getFileName()%>"><%=boardvo.getFileVO().getFileName()%></a></td>
+						  	</tr>
+						  	<tr>
+						  		<td colspan="2">
+						  			<input type="submit" value="수정" name="updateBtn" id="updateBtn">
+									<input type="button" value="취소" name="deleteBtn" id="deleteBtn" onclick="location.href='boardList.jsp'">
+						  		</td>
+						  	</tr>
+						  	
+						  </table>
+					 </form>
 					 
 					 
 					 

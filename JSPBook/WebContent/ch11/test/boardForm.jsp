@@ -59,7 +59,7 @@
 					 <hr>
 					 <form action="boardInsert.jsp" method="post" enctype="multipart/form-data">
 						  제목 : <input type="text" name="title" id="title"><br>
-						  작성자 : <input type="text" name="writer" id="writer"><br>
+						  작성자 : <input type="text" name="writer" id="writer" value="a001" disabled><br>
 						  내용 : <input type="text" name="content" id="content"><br>
 						 <hr>
 						  첨부파일 : <input type="file" name="file" id="file">

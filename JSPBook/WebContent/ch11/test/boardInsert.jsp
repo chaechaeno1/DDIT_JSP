@@ -65,18 +65,21 @@
 							}
 							
 							DiskFileUpload upload = new DiskFileUpload();
-							upload.setSizeMax(1000000); //최대크기
-							upload.setSizeThreshold(maxSize); //메모리상에 저장할 최대 크기
+							upload.setSizeMax(1000000); 
+							upload.setSizeThreshold(maxSize); 
 							upload.setRepositoryPath(realFolder); //업로드된 파일을 임시로 저장할 경로
 							
 							List items = upload.parseRequest(request); //일반 데이터, 파일데이터 모두 담음
 							Iterator params = items.iterator();
 							
+							BoardFileVO fileVO = new BoardFileVO();
+							
 							//데이터를 저장하기 위한 변수 설정
 							String title = "";
-							String writer = "";
+							String writer = "a001";
 							String content = "";
 							String fileName = "";
+							
 							
 							while(params.hasNext()){
 								FileItem item = (FileItem)params.next();
@@ -99,7 +102,9 @@
 									long fileSize = item.getSize(); //파일 크기 정보
 									File saveFile = new File(realFolder + "/" + fileName);
 									item.write(saveFile); //파일 복사
-									
+									fileVO.setFileName(fileName);
+									fileVO.setContentType(contentType);
+									fileVO.setFileSize(fileSize);
 								}
 							
 							}
@@ -107,21 +112,26 @@
 							
 							BoardRepository dao = BoardRepository.getInstance();
 							
-							
-							
-							BoardFileVO fileVO = new BoardFileVO();
-							fileVO.setFileName(fileName);
+						
                             
 							BoardVO board = new BoardVO();
 							board.setTitle(title);
 							board.setWriter(writer);
 							board.setContent(content);
 							board.setFileVO(fileVO);
+					
 							
 
 							dao.addBoard(board);
+							/* public void addBoard(BoardVO board) {
+								board.setNo(++no);
+								board.setRegDate(getCurrentTime());
+								listOfBoard.add(board);
+							} */
 							
-							response.sendRedirect("boardView.jsp?no=" + );
+							int boardNo = board.getNo();
+							
+							response.sendRedirect("boardView.jsp?no="+boardNo);
 
 							
 

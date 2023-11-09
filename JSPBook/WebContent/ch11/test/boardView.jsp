@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="kr.or.ddit.ch11.vo.BoardFileVO"%>
 <%@page import="kr.or.ddit.ch11.vo.BoardVO"%>
 <%@page import="kr.or.ddit.ch11.dao.BoardRepository"%>
@@ -62,48 +63,53 @@
 						4. 목록 버튼 클릭 시, 목록 페이지(boardList.jsp)로 이동합니다.
 					 -->
 					 
+					<%
+						//<a href="boardView.jsp?no=${board.no}">에서 no을 받았음
+						String no = request.getParameter("no");
+						BoardRepository dao = BoardRepository.getInstance();
+						BoardVO boardvo = dao.getBoardById(Integer.parseInt(no));
+						
+					%>
+<%-- 					<c:set var="dao" value="<%= kr.or.ddit.ch11.dao.BoardRepository.getInstance() %>" /> --%>
+<%-- 					<c:set var="boardList" value="${dao.selectBoardList()}" /> --%>
+<%-- 					<c:set var="no" value="${dao.getNo()}" /> --%>
+						<c:set value="<%=boardvo %>" var="board"/>
 					 
-					  <%
-                                   // 게시글 ID를 가져와서 해당 게시글의 데이터를 조회합니다.
-                                   String boardId = request.getParameter("board_id");
-                                   BoardRepository dao = BoardRepository.getInstance();
-                                   BoardVO board = dao.getBoardById(boardId); // 예시로 메서드를 호출하여 게시글 데이터를 가져오는 것으로 가정합니다.
-                                   BoardFileVO fileVO = board.getFileVO(); // 파일 정보를 가져오는 것으로 가정합니다.
-                       %>
+					  
 					 
 					 <h4>게시판 상세보기</h4>
 					 <hr>
 
 					 <!-- 테이블 만들기 -->
 					 <table width="100%" class="table table-bordered">
-                            <c:forEach items="${ListOfBoards}" var="board">
-                                <tr>
-                                    <td width="20%">제목</td>
-                                    <td width="50%">${board.title}</td>
-                                </tr>
+							<tr>
+								<td width="20%">제목</td>
+								<td width="50%">${board.title}</td>
+							</tr>
 
-                                <tr>
-                                    <td colspan="2">${board.writer} ${board.regDate} ${board.hit}</td>
-                                </tr>
+							<tr>
+								<td colspan="2">${board.writer} ${board.regDate}
+									${board.hit}</td>
+							</tr>
 
-                                <tr>
-                                    <td colspan="2">${board.content}</td>
-                                </tr>
+							<tr>
+								<td colspan="2">${board.content}</td>
+							</tr>
 
-                                <tr>
-                                    <td width="20%">첨부파일</td>
-                                    <td width="50%">${board.fileVO.fileName}</td>
-                                </tr>
+							<tr>
+								<td width="20%">첨부파일</td>
+								<!-- ${pageContext.request.contextPath} 추가하니까 잘됨!!!! -->
+								<td width="50%"><a href="${pageContext.request.contextPath}/resources/images/${board.fileVO.fileName}" download>${board.fileVO.fileName}</a></td>
+							</tr>
 
-                                <tr>
-                                    <td colspan="2">
-                                        <input type="button" name="updateBtn" id="updateBtn" onclick="location.href='boardUpdateForm.jsp'">
-                                        <input type="button" name="deleteBtn" id="deleteBtn" onclick="confirmDelete()">
-                                        <input type="button" name="listBtn" id="listBtn" onclick="location.href='boardList.jsp'">
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </table>
+							<tr>
+								<td colspan="2">
+									<input type="button" name="updateBtn" id="updateBtn" value="수정" onclick="location.href='boardUpdateForm.jsp?no=${board.no}'">
+									<input type="button" name="deleteBtn" id="deleteBtn" value="삭제" onclick="confirmDelete()">
+									<input type="button" name="listBtn" id="listBtn" value="목록" onclick="location.href='boardList.jsp'">
+								</td>
+							</tr>
+						</table>
 					 
 
 					 
@@ -119,12 +125,10 @@
 </body>
 
 <script>
-function confirmDelete(){s
+function confirmDelete(){
 	var result = confirm("정말로 삭제하시겠습니까?");
 	if(result){
-		location.href="boardRemove.jsp";
-	}else{
-		location.href="boardView.jsp";
+		location.href = "boardRemove.jsp?no=${board.no}"; /* 게시물 번호를 받아서 넘겨줘야 함 */
 	}
 }
 

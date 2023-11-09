@@ -1,4 +1,8 @@
+<%@page import="kr.or.ddit.ch11.vo.BoardVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.or.ddit.ch11.dao.BoardRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 <head>
@@ -61,6 +65,47 @@
 					 <hr>
 					 <h3>자료실</h3>
 					 <hr>
+					 
+					 
+					 <!-- 스크립틀릿으로 할 때 왜 적용이 안되는지??? -->
+					<c:set var="dao" value="<%= BoardRepository.getInstance() %>" />
+					<c:set var="boardList" value="${dao.selectBoardList()}" />		 
+					 
+					 
+					 <c:set value="${boardList}" var="board" />
+					 
+					  <!-- 이미지 들어갈 공간 만들기 -->
+					 <table width="100%" class="table table-striped table-bordered table-hover">
+
+					 						 			
+					 	<c:choose>		
+							<c:when test="${empty boardList}">
+								<tr>
+									<th>조회하실 이미지가 존재하지 않습니다.</th>
+								</tr>
+							</c:when>
+							
+							<c:otherwise>
+								<c:forEach items="${boardList}" var="board"> <!-- forEach에도 var 설정 해주어야함!! -->
+								<tr>
+									<td>
+									<div style="width:300px;">
+										<img alt="${board.fileVO.fileName}" src="${pageContext.request.contextPath}/resources/images/${board.fileVO.fileName }" width="10%" height="10%">
+									</div>
+										파일명 : <a href="${pageContext.request.contextPath }/resources/images/${board.fileVO.fileName }" download>${board.fileVO.fileName}</a><br>
+										크기 : ${board.fileVO.fileSize}<br>
+									</td>
+								</tr>
+								
+								</c:forEach>
+
+							</c:otherwise>
+						
+						</c:choose>
+					 	
+					 </table>
+					 
+					 
 					 
 					 
 					 

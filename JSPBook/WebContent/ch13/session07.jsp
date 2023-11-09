@@ -1,6 +1,6 @@
-<%@page import="kr.or.ddit.ch11.vo.BoardVO"%>
-<%@page import="kr.or.ddit.ch11.dao.BoardRepository"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.Enumeration"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 <head>
@@ -9,23 +9,27 @@
     <title>쉽게 배우는 JSP 웹 프로그래밍</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-	<%@ include file="/pageModule/headPart.jsp" %>
+	<%@ include file ="/pageModule/headPart.jsp" %>
+
 </head>
+
 <body>
-	<%@ include file="/pageModule/header.jsp" %>
+ 
+    <%@ include file ="/pageModule/header.jsp" %>
+ 
 
     <div class="breadcrumbs" style="padding-top:40px;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">JSP 개요</h1>
+                        <h1 class="page-title">세션</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
                         <li><a href="/">INDEX</a></li>
-                        <li>CH01</li>
+                        <li>CH13</li>
                     </ul>
                 </div>
             </div>
@@ -37,42 +41,39 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-12 col-md-12 col-12">
                     <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
-					<!-- 
-						삭제할 게시글 정보를 넘겨받고, 삭제를 진행해주세요.
-						삭제가 실패하여 에러가 발생 할 경우, exceptionBoard_error.jsp 페이지로 이동할 수 있게 해주세요.
+
+						<h3>-----세션 유효 시간 변경 전 -----</h3>
+						<%
+							int defaultTime = session.getMaxInactiveInterval(); //1800초. 30분
+							int time = session.getMaxInactiveInterval() / 60;
+							
+							out.println("세션 유효시간(기본) : " + defaultTime + "<br>");
+							out.println("세션 유효시간 : " + time + "분<br>");
 						
-						삭제 완료 후, 게시판 목록 페이지(boardList.jsp)로 이동해주세요.
-					 -->
-					 <!-- 
-						1. 게시글 삭제를 처리해주세요.
-							> 삭제 성공 후, 상세보기 페이지(boardList.jsp)로 이동해주세요.
-							> 삭제 실패 후, 에러 페이지(exceptionBoard_error.jsp)로 이동해주세요.
-					 -->
-					 
-					 
-					<%
-					 	int no = Integer.parseInt(request.getParameter("no"));
-					 
-					 	BoardRepository.getInstance().deleteBoard(no);
-					 	
-					 	response.sendRedirect("boardList.jsp");
-					 %>
-					 
-					 
-					 
-					 
-					 
-					 
-					 
-					 
-					 
+						%>
+						<h3>-----세션 유효 시간 변경 후 -----</h3>
+						<%
+							session.setMaxInactiveInterval(60*60); //1시간 설정
+							//setMaxInactiveInterval() 메소드는 초 단위로 값을 받으므로
+							//60(분) * 60(초)
+							time = session.getMaxInactiveInterval()	/ 60;
+							out.println("세션 유효시간 : " + time + "분<br>");
+						%>
+						
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
+ 
+
+ 
 	<%@ include file="/pageModule/footer.jsp" %>
 
-	<%@ include file="/pageModule/footerPart.jsp" %>
+    <%@ include file="/pageModule/footerPart.jsp" %>
+
+
 </body>
+
 </html>
