@@ -34,6 +34,8 @@ table{
 </style>
 <script>
 
+mypath = "<%= request.getContextPath()%>";
+
 //ajax를 따로 관리하는 js 들어갈 공간
 $(function(){
 	$.boardList();
@@ -47,7 +49,7 @@ $(function(){
 <%
 	ArrayList<BoardVO> boardList = (ArrayList<BoardVO>)request.getAttribute("boardList");
 
-	new Gson().toJson(boardList);
+	out.print(new Gson().toJson(boardList));
 
 %>
 
@@ -55,7 +57,7 @@ $(function(){
 <section id="listForm">
     <h2>글 목록</h2>
     <hr>
-    <table border="1" id="boardListTable">
+    <table border="1" class="boardListTable">
        
     </table>
 </section>
