@@ -36,7 +36,7 @@ public class BoardList extends HttpServlet {
 		request.setAttribute("boardList", boardList);
 		
 		//WEB-INF
-		String jspPage = "/WEB-INF/views/board/boardList.jsp";
+		String jspPage = "/WEB-INF/views/board/boardListAct.jsp";
 		
 		//view페이지 설정 -> forward
 		request.getRequestDispatcher(jspPage).forward(request, response);

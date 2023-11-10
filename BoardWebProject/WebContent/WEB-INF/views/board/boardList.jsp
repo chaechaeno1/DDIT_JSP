@@ -46,12 +46,6 @@ $(function(){
 
 <body>
 
-<%
-	ArrayList<BoardVO> boardList = (ArrayList<BoardVO>)request.getAttribute("boardList");
-
-	out.print(new Gson().toJson(boardList));
-
-%>
 
 <!-- 게시판 목록 List -->
 <section id="listForm">
