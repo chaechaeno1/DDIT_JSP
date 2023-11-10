@@ -102,6 +102,15 @@ public class BoardVO {
 	public void setBo_hit(int bo_hit) {
 		this.bo_hit = bo_hit;
 	}
+
+
+	@Override
+	public String toString() {
+		return "BoardVO [bo_no=" + bo_no + ", bo_title=" + bo_title + ", bo_content=" + bo_content + ", bo_writer="
+				+ bo_writer + ", bo_date=" + bo_date + ", bo_hit=" + bo_hit + "]";
+	}
+	
+	
 	
 	
 	

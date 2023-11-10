@@ -22,7 +22,7 @@ public class BoardList extends HttpServlet {
 
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
 		
@@ -35,15 +35,17 @@ public class BoardList extends HttpServlet {
 		//List 결과를 request에 저장
 		request.setAttribute("boardList", boardList);
 		
+		//WEB-INF
+		String jspPage = "/WEB-INF/views/board/boardList.jsp";
+		
 		//view페이지 설정 -> forward
-		request.getRequestDispatcher("/WEB-INF/views/board/boardList.jsp").forward(request, response);
+		request.getRequestDispatcher(jspPage).forward(request, response);
 		
-		
-		
-		
-		
-		
-		
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
