@@ -38,7 +38,7 @@ public class BoardDetail extends HttpServlet {
 		BoardVO hitVo = new BoardVO();
 		hitVo.setBo_no(iboardno);
 		hitVo.setBo_hit(hit);
-		int updCnt = service.setCountHit(hitVo);
+		int hitCount = service.setCountHit(hitVo);
 		
 		request.setAttribute("boardvo", boardvo);
 		

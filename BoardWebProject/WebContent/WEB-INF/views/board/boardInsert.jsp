@@ -28,13 +28,14 @@ table{
 
 <body>
 		<c:set var="path" value="<%= request.getContextPath() %>"></c:set>
-		
+
+<section>		
 		<h1>게시판 등록</h1>
 		
 		<br />
 		<hr />
 		<br />
-<section>	
+	
 		<form action="${path}/BoardInsert.do" method="post">
 			<table border="1" style="width: 100%;">
 				<tr>

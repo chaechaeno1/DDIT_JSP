@@ -72,6 +72,11 @@ public class BoardDAOImpl implements IBoardDAO {
 			session = MybatisUtil.getSqlSession();
 			cnt = session.insert("board.insertBoard", boardVO);
 			
+			//insert, update, delete에는 commit 처리 반드시 해야 적용됨!
+			if(cnt > 0) {
+				session.commit();
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -91,6 +96,11 @@ public class BoardDAOImpl implements IBoardDAO {
 			session = MybatisUtil.getSqlSession();
 			cnt = session.update("board.updateBoard",boardVO);
 			
+			//insert, update, delete에는 commit 처리 반드시 해야 적용됨!
+			if(cnt > 0) {
+				session.commit();
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -109,7 +119,11 @@ public class BoardDAOImpl implements IBoardDAO {
 		try {
 			session = MybatisUtil.getSqlSession();
 			cnt = session.delete("board.deleteBoard",boardNo);
-			System.out.println(boardNo);
+			
+			//insert, update, delete에는 commit 처리 반드시 해야 적용됨!
+			if(cnt > 0) {
+				session.commit();
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();

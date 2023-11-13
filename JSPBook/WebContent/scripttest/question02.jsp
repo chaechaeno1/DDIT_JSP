@@ -106,56 +106,58 @@ $(function(){
 	
 	
 	var clickOne = "";
+	var clickOneValue = "";
+	
 	
 	//td버튼 클릭했을 때 
 	$('td').click(function(){
-		if(clickOne === ""){
+		if(clickOne == ""){
 			clickOne = $(this).text();
+			clickOneValue = $(this);
 			$(this).css("background", "yellow");
 			var process = $('#process').text(clickOne+"와(과)");			
 		}else{
 			var clickTwo = $(this).text();
+			clickTwoValue = $(this);
 			$(this).css("background", "yellow");
 			process = $('#process').text(clickOne+"와(과) "+clickTwo+"의 자리를 바꿉니다.");	
+			
+			clickOneValue.text(clickTwo);
+			clickTwoValue.text(clickOne);
+			
+            clickOneValue.css("background", "");
+            clickTwoValue.css("background", "");
+            /* clickOne = "";
+            clickOneValue = null;	 */		
 		}
+		
+
 	
 		
-	//출력버튼 클릭했을 때	
-	$('clickBtn').click(function(){	
-	
-		
-		
-	}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	});
 	
+		
+	//출력버튼 눌렀을 때 
+	$('#clickBtn').click(function(){
+		var table = $('.table')[0].outerHTML; //테이블 모양 그대로 출력되게 함
+		$('#output').html(table);
+		
+		
+		var targetCell = $('#output td:contains("' + clickOne + '")');
+
+	    targetCell.animate({ backgroundColor: 'green' }, 'slow', function(){
+	        // 애니메이션이 끝나면 배경색을 초기화합니다.
+	        $(this).animate({ backgroundColor: '' }, 'slow');
+	    });
+		
+		
+		
+		
+		
+	}); //#clickBtn 끝
 	
-	
-	
-	
-	
-	
-});
+
+}); //function 끝
 </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
