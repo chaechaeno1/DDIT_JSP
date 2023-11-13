@@ -27,8 +27,6 @@ public class BoardServiceImpl implements IBoardService {
 
 	@Override
 	public BoardVO selectBoardDetail(int boardNo) {
-		int cnt = dao.setCountHit(boardNo);
-		if(cnt==0) return null;
 		return dao.selectBoardDetail(boardNo);
 	}
 
@@ -48,8 +46,8 @@ public class BoardServiceImpl implements IBoardService {
 	}
 
 	@Override
-	public int setCountHit(int boardNo) {
-		return dao.setCountHit(boardNo);
+	public int setCountHit(BoardVO boardvo) {
+		return dao.setCountHit(boardvo);
 	}
 
 }

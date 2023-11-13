@@ -14,38 +14,40 @@ import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.vo.BoardVO;
 
 /**
- * Servlet implementation class BoardList
+ * Servlet implementation class BoardDetail
  */
-@WebServlet("/BoardList.do")
-public class BoardList extends HttpServlet {
+@WebServlet("/BoardDetail.do")
+public class BoardDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-
-
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		request.setCharacterEncoding("utf-8");
 		
+		String boardNo = request.getParameter("boardNo");
+		System.out.println(boardNo);
+
+		
+		int iboardno = Integer.parseInt(boardNo);
+		
+		// 게시판 상세 정보 가져오기
 		IBoardService service = BoardServiceImpl.getInstance();
+		BoardVO boardvo = service.selectBoardDetail(iboardno);
 		
+		// 게시판 조회수 1 증가
+		int hit = boardvo.getBo_hit();
+		BoardVO hitVo = new BoardVO();
+		hitVo.setBo_no(iboardno);
+		hitVo.setBo_hit(hit);
+		int updCnt = service.setCountHit(hitVo);
 		
-		//출력할 글 리스트 가져오기
-		List<BoardVO> boardList = service.selectBoardList();
+		request.setAttribute("boardvo", boardvo);
 		
-		//List 결과를 request에 저장
-		request.setAttribute("boardList", boardList);
-		
-		//WEB-INF
-		String jspPage = "/WEB-INF/views/board/boardList.jsp";
-		
-		//view페이지 설정 -> forward
+		String jspPage = "/WEB-INF/views/board/boardDetail.jsp";
 		request.getRequestDispatcher(jspPage).forward(request, response);
-		
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

@@ -2,11 +2,12 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 목록</title>
+<title>게시판 글쓰기</title>
 </head>
 
 <style>
@@ -26,38 +27,42 @@ table{
 
 
 <body>
-
-<%
-	ArrayList<BoardVO> boardList = (ArrayList<BoardVO>)request.getAttribute("boardList");
-
-%>
-
-<!-- 게시판 목록 List -->
-<section id="listForm">
-    <h2>글 목록</h2>
-    <hr>
-    <table border="1">
-        <tr>
-            <th width="10%">번호</th>
-            <th width="45%">제목</th>
-            <th width="15%">작성자</th>
-            <th width="20%">작성일</th>
-            <th width="10%">조회수</th>
-        </tr>
-        <% 
-        if(boardList == null || boardList.isEmpty()){ 
-        
-        %>
-            <tr>
-                <td colspan="5">조회할 글 목록이 없습니다.</td>
-            </tr>
-		<%
-        }
+		<c:set var="path" value="<%= request.getContextPath() %>"></c:set>
 		
-		%>
-
-    </table>
-</section>
-
-</body>
+		<h1>게시판 등록</h1>
+		
+		<br />
+		<hr />
+		<br />
+<section>	
+		<form action="${path}/BoardInsert.do" method="post">
+			<table border="1" style="width: 100%;">
+				<tr>
+					<th width="30%">제목</th>
+					<td width="70%">
+						<input type="text" name="title" style="width: 95%;" />
+					</td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td>
+						<textarea name="content" style="width: 95%; height: 100px;" wrap="soft"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<th>작성자</th>
+					<td>
+						<input type="text" name="writer" style="width: 95%;" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button type="submit">등록</button>
+						<a href="${path}/">게시글 목록</a>
+					</td>
+				</tr>
+			</table>
+		</form>
+</section>			
+	</body>
 </html>

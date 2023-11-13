@@ -63,7 +63,7 @@ public interface IBoardDAO {
 	 * @param boardNo 조회수를 증가할 게시글 번호
 	 * @return 작업성공 1, 작업실패 0
 	 */
-	public int setCountHit(int boardNo);
+	public int setCountHit(BoardVO boardvo);
 	
 	
 }

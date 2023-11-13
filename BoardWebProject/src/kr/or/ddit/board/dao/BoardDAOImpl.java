@@ -70,7 +70,7 @@ public class BoardDAOImpl implements IBoardDAO {
 		
 		try {
 			session = MybatisUtil.getSqlSession();
-			cnt = session.insert("board.isertBoard", boardVO);
+			cnt = session.insert("board.insertBoard", boardVO);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,6 +109,7 @@ public class BoardDAOImpl implements IBoardDAO {
 		try {
 			session = MybatisUtil.getSqlSession();
 			cnt = session.delete("board.deleteBoard",boardNo);
+			System.out.println(boardNo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,13 +122,13 @@ public class BoardDAOImpl implements IBoardDAO {
 	}
 
 	@Override
-	public int setCountHit(int boardNo) {
+	public int setCountHit(BoardVO boardvo) {
 		SqlSession session = null;
 		int cnt = 0;
 		
 		try {
 			session = MybatisUtil.getSqlSession();
-			cnt = session.update("board.setCountHit",boardNo);
+			cnt = session.update("board.setCountHit",boardvo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
