@@ -105,52 +105,71 @@
 $(function(){
 	
 	
-	var clickOne = "";
-	var clickOneValue = "";
+	var nameBox = ""; //이름을 담을 공간(텍스트를 가져옴)
+	var elementBox; //Element를 담을 공간(td자체를 의미함)
+	var flag = false; //첫번째 클릭인지 두번째 클릭인지 스위칭.
 	
-	
-	//td버튼 클릭했을 때 
-	$('td').click(function(){
-		if(clickOne == ""){
-			clickOne = $(this).text();
-			clickOneValue = $(this);
-			$(this).addClass("selected-cell");
-			$(this).css("background", "yellow");
-			var process = $('#process').text(clickOne+"와(과)");			
-		}else{
-			var clickTwo = $(this).text();
-			clickTwoValue = $(this);
-			$(this).css("background", "yellow");
-			process = $('#process').text(clickOne+"와(과) "+clickTwo+"의 자리를 바꿉니다.");	
+	$("td").on("click",function(){
+		
+		//첫번째 클릭과 두번째 클릭을 나누어 처리
+		if(flag){ //두번째 클릭 시
+			flag = false; 	//두번째 클릭 했음!
+			elementBox.html($(this).html());	//this는 두번째 누른 element가 되고
 			
-			clickOneValue.text(clickTwo);
-			clickTwoValue.text(clickOne);
+			$("#process").html(nameBox + "님과 " + $(this).html() + "님을 변경합니다!");
+			$(this).html(nameBox); //지금 눌렀던 공간에는 처음 클릭했던 nameBox가 넣어짐
 			
-            clickOneValue.css("background", "");
-            clickTwoValue.css("background", "");
-            /* clickOne = "";
-            clickOneValue = null;	 */		
+			//초기화
+			nameBox = "";
+			elementBox = null;
+			$("td").css("background-color","white");
+		
+		}else{	  //첫번째 클릭 시
+			flag = true;	// 먼저 클릭했음
+			nameBox = $(this).html();	//이름을 담는다
+			elementBox = $(this);		
+			$(this).css("background-color", "yellow");
+			
+			$("#process").html(nameBox + "님과 ");
+			
 		}
 		
-
-	
-		
-
 	});
 	
+	
+	//출력버튼 눌렀을 때!
+	$("#clickBtn").on("click",function(){
+		$("#output").html(""); //output 공간 초기화
 		
-	//출력버튼 눌렀을 때 
-	$('#clickBtn').click(function(){
-		var table = $('.table')[0].outerHTML; //테이블 모양 그대로 출력되게 함
-		$('#output').html(table);
+		var tds = document.getElementsByTagName("td"); //모든 td를 다 가져옴
+		var html = "<table class='table table-bordered' style='text-align:center; font-size:24px;'><tr>";
 		
-
+		//반복문 돌리기(내 이름인지 아닌지에 따라 애니메이션 적용 달라짐)
+		for(var i = 1; i <= tds.length; i++){
+			//첫번째 검증
+			if(tds[i-1].innerText == "조현준"){
+				html += "<td width='10%'><marquee><font color='blue'>"+ tds[i-1].innerText +"</font></marquee></td>";
+				
+			}else{
+				html += "<td width='10%'>"+ tds[i-1].innerText +"</td>";
+				
+				
+			}
+			
+			//1줄에 9칸이므로 9칸이 넘어가면 다음 행 만들기. 인덱스는 0부터 시작이므로 0~8이 9칸!
+			if(i % 9 == 0){ //9의 배수일 때
+				html += "</tr><tr>";
+				
+			}
+			
+		}
+		html += "</table>";
+		$("#output").html(html);
 		
-
-		
-		
-		
-	}); //#clickBtn 끝
+	});
+	
+	
+	
 	
 
 }); //function 끝
