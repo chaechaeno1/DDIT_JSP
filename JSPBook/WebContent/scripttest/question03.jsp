@@ -299,6 +299,8 @@
 	<%@ include file="/pageModule/footerPart.jsp" %>
 </body>
 
+
+<!-- 배열 사용하여 포스기 만들기 -->
 <script type="text/javascript">
 	// p태그 안에 data-menu="화이트 초콜릿 라떼"를 가져와야함
 	// element.data("menu") -> 오른쪽에 있는 menu가 key값이 됨
