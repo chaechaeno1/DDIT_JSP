@@ -144,6 +144,11 @@ public class BoardDAOImpl implements IBoardDAO {
 			session = MybatisUtil.getSqlSession();
 			cnt = session.update("board.setCountHit",boardvo);
 			
+			//insert, update, delete에는 commit 처리 반드시 해야 적용됨!
+			if(cnt > 0) {
+				session.commit();
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
