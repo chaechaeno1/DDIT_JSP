@@ -17,6 +17,8 @@ import kr.or.ddit.vo.BoardVO;
 @WebServlet("/BoardInsert.do")
 public class BoardInsert extends HttpServlet {
 
+	//일반적인 페이징 처리
+	//insert화면 불러오는 것
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
@@ -24,6 +26,7 @@ public class BoardInsert extends HttpServlet {
 		request.getRequestDispatcher(jspPage).forward(request, response);
 	}
 
+	//데이터 가용했을 때
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");

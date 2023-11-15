@@ -21,7 +21,8 @@ public class BoardList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
-
+	//일반적인 페이지 요청
+	//list는 get방식으로 불러옴
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
@@ -43,9 +44,10 @@ public class BoardList extends HttpServlet {
 		
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		doGet(request, response);
-	}
+	
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		
+//		doGet(request, response);
+//	}
 
 }
